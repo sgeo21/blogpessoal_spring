@@ -51,8 +51,11 @@ public class Postagem {
 	@JsonIgnoreProperties("postagem") 
 	private Tema tema;
 	
-
+	@ManyToOne //define a ligação, muitas postagens para um usuario 
+	@JsonIgnoreProperties("postagem") 
+	private Usuario usuario;
 	
+	//Geração de getters and setters
 	public Long getId() {
 		return id;
 	}
@@ -84,5 +87,11 @@ public class Postagem {
 		this.tema = tema;
 	}
 	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 	
 }
