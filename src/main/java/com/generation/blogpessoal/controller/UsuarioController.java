@@ -48,12 +48,12 @@ public class UsuarioController {
 				.orElse(ResponseEntity.badRequest().build()); 
 	}
 	
-	@PutMapping("/cadastrar") // Endpoint para editar um usuário
-	public ResponseEntity<Usuario> put(@Valid @RequestBody Usuario usuario) {
-		return usuarioService.atualizarUsuario(usuario)
-				.map(resposta -> ResponseEntity.status(HttpStatus.OK).body(resposta)) 
-				.orElse(ResponseEntity.notFound().build()); 
-	}
+	@PutMapping("/atualizar")
+    public ResponseEntity<Usuario> put(@Valid @RequestBody Usuario usuario){
+        return usuarioService.atualizarUsuario(usuario)
+                .map(resposta -> ResponseEntity.status(HttpStatus.OK).body(resposta))
+                .orElse(ResponseEntity.notFound().build());
+    } 
 	
 	@PostMapping("/logar") // Endpoint para cadastrar um novo usuário
 	public ResponseEntity<UsuarioLogin> autenticar(@Valid @RequestBody Optional <UsuarioLogin> usuarioLogin) {

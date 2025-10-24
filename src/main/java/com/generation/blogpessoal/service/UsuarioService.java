@@ -51,17 +51,18 @@ public class UsuarioService {
 	}
 
 	public Optional<Usuario> atualizarUsuario(Usuario usuario) {
-		if (usuarioRepository.findByUsuario(usuario.getUsuario()).isPresent()) { // verifica se já existe o usuário
-			return Optional.empty();
+
+		if (!usuarioRepository.findById(usuario.getId()).isPresent()) { // verifica se já existe o usuário
+			return Optional.empty(); // não edita se não existir o usuário
 		}
 
 		Optional<Usuario> usuarioExistente = usuarioRepository.findByUsuario(usuario.getUsuario());
-		if (usuarioExistente.isEmpty() && !usuarioExistente.get().getId().equals(usuario.getId())) {
+		
+		if (usuarioExistente.isPresent() && !usuarioExistente.get().getId().equals(usuario.getId())) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Usuário já existe!", null);
 		}
 
 		usuario.setSenha(passwordEncoder.encode(usuario.getSenha())); // criptografa a senha
-
 		return Optional.of(usuarioRepository.save(usuario));
 	}
 
