@@ -16,37 +16,37 @@ import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
 
 @Configuration
-public class SwaggerConfig { //configuracao do Swagger
+public class SwaggerConfig {
 	 
 	@Bean
-    OpenAPI springBlogPessoalOpenAPI() { //definindo as informacoes do projeto
-        return new OpenAPI() //retornando um OpenAPI - Definicoes da API
-            .info(new Info() 
+    OpenAPI springBlogPessoalOpenAPI() {
+        return new OpenAPI()
+            .info(new Info()
                 .title("Projeto Blog Pessoal")
-                .description("Projeto Blog Pessoal - Geovana Cazali")
+                .description("Projeto Blog Pessoal - Generation Brasil")
                 .version("v0.0.1")
                 .license(new License()
-                    .name("Geovana Cazali")
-                    .url("com.generation.blogpessoal.BlogpessoalApplication"))
+                    .name("Generation Brasil")
+                    .url("https://brazil.generation.org/"))
                 .contact(new Contact()
-                    .name("Geovana Cazali")
-                    .url("https://github.com/sgeo21/blogpessoal_spring")
-                    .email("s.geo2112@gmail.com")))
+                    .name("Generation Brasil")
+                    .url("https://github.com/conteudoGeneration")
+                    .email("conteudogeneration@generation.org")))
             .externalDocs(new ExternalDocumentation()
                 .description("Github")
-                .url("https://github.com/sgeo21"))
+                .url("https://github.com/conteudoGeneration/"))
             .components(new Components()
                     .addSecuritySchemes("jwt_auth", createSecurityScheme()))
                 .addSecurityItem(new SecurityRequirement().addList("jwt_auth"));
     }
 
 	@Bean
-	OpenApiCustomizer customerGlobalHeaderOpenApiCustomiser() { //adicionando respostas padrao para todas as APIs
+	OpenApiCustomizer customerGlobalHeaderOpenApiCustomiser() {
 
 		return openApi -> {
-			openApi.getPaths().values().forEach(pathItem -> pathItem.readOperations().forEach(operation -> { //percorrendo todos os caminhos da API
+			openApi.getPaths().values().forEach(pathItem -> pathItem.readOperations().forEach(operation -> {
 
-				ApiResponses apiResponses = operation.getResponses(); // respostas da operacao
+				ApiResponses apiResponses = operation.getResponses();
 
 				apiResponses.addApiResponse("200", createApiResponse("Sucesso!"));
 				apiResponses.addApiResponse("201", createApiResponse("Objeto Persistido!"));
@@ -61,14 +61,14 @@ public class SwaggerConfig { //configuracao do Swagger
 		};
 	}
 
-	private ApiResponse createApiResponse(String message) { //criando a resposta da API
+	private ApiResponse createApiResponse(String message) {
 
-		return new ApiResponse().description(message); //retornando a mensagem
+		return new ApiResponse().description(message);
 
 	}
 	
-	private SecurityScheme createSecurityScheme() { //criando o esquema de seguranca
-	    return new SecurityScheme() //retornando um esquema de seguranca - definicoes de seguranca
+	private SecurityScheme createSecurityScheme() {
+	    return new SecurityScheme()
 	        .name("jwt_auth")
 	        .type(SecurityScheme.Type.HTTP)
 	        .scheme("bearer")
