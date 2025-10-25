@@ -27,7 +27,7 @@ public class SwaggerConfig { //configuracao do Swagger
                 .version("v0.0.1")
                 .license(new License()
                     .name("Geovana Cazali")
-                    .url("https://brazil.generation.org/"))
+                    .url("com.generation.blogpessoal.BlogpessoalApplication"))
                 .contact(new Contact()
                     .name("Geovana Cazali")
                     .url("https://github.com/sgeo21/blogpessoal_spring")
