@@ -77,7 +77,6 @@ public class PostagemController {
 			if(postagemRepository.existsById(postagem.getId())){ 
 				if(temaRepository.existsById(postagem.getTema().getId())){//checa o tema e a postagem
 				 
-				postagem.setId(null); //para garantir que a postagem será nova
 				return ResponseEntity.status(HttpStatus.CREATED).body(postagemRepository.save(postagem));
 				}
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "O tema não existe!", null);
